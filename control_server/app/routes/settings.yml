@@ -14,17 +14,17 @@
                 properties:
                   host:
                     type: string
-                    example: "192.168.1.1"
+                    example: "192.168.8.221"
                   port:
                     type: integer
                     format: int32
                     example: 22
                   username:
                     type: string
-                    example: "robot_username"
+                    example: "ruser"
                   password:
                     type: string
-                    example: "password1234"
+                    example: "rethink"
                 required:
                   - host
                   - port
