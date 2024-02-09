@@ -1,0 +1,47 @@
+/settings:
+  post:
+    summary: Update settings
+    description: This route allows updating the settings with SSH configuration.
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              sshConfig:
+                type: object
+                properties:
+                  host:
+                    type: string
+                    example: "192.168.1.1"
+                  port:
+                    type: integer
+                    format: int32
+                    example: 22
+                  username:
+                    type: string
+                    example: "robot_username"
+                  password:
+                    type: string
+                    example: "password1234"
+                required:
+                  - host
+                  - port
+                  - username
+                  - password
+    responses:
+      '200':
+        description: Settings updated successfully.
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                message:
+                  type: string
+                  example: "Settings updated successfully."
+      '400':
+        description: Bad request. Invalid input received.
+      '500':
+        description: Internal Server Error.

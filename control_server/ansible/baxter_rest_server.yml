@@ -1,0 +1,27 @@
+---
+- hosts: baxter_rest_server
+
+  vars:
+    npm_cmd: "prod"
+  
+  tasks:
+  - name: Ping server
+    ping:
+
+  - name: Start nodejs
+    docker_container:
+      image: node
+      name: baxter_rest_server
+      restart_policy: "always"
+      restart: yes
+      network_mode: "host"
+      # ports:
+      #   - "3535:3535"
+      volumes:
+        - "{{ app_root }}/control_server/app:/home/node/app"
+      working_dir: "/home/node/app"
+      command: "/bin/bash -c \"npm i && npm run {{ npm_cmd }}\""
+      log_driver: "json-file"
+      log_options:
+        max-size: "1m"
+        max-file: "1"

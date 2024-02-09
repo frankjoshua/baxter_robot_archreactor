@@ -1,0 +1,2 @@
+[baxter_rest_server]
+localhost ansible_ssh_user=josh app_root=/home/josh/development/workspace/baxter_robot_archreactor

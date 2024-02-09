@@ -1,0 +1,38 @@
+/control:
+    post:
+      summary: Control arms
+      description: Send control commands to arms.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                arms:
+                  type: object
+                  properties:
+                    left:
+                      type: object
+                      properties:
+                        shoulder:
+                          type: number
+                          format: float
+                          example: 1.5
+                    right:
+                      type: object
+                      properties:
+                        shoulder:
+                          type: number
+                          format: float
+                          example: -0.2
+      responses:
+        '200':
+          description: Control command accepted
+          content:
+            application/json:
+              schema:
+                type: object
+
+        '400':
+          description: Bad request
