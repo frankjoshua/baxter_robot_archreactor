@@ -48,15 +48,50 @@ class BaxterControl {
     }
 
     async control(data) {
-        // TODO: Convert data to ssh command
+        // Initialize results with default values
+        let results = {
+            uptime: null,
+            left: null,
+            right: null,
+            errors: [] // Collect errors for each part
+        };
+    
         try {
-            const result = await this.executeCommand('uptime');
-            return { result: result };
+            const left = data.arms.left;
+            const right = data.arms.right;
+    
+            // Uptime command
+            try {
+                results.uptime = await this.executeCommand('uptime');
+            } catch (error) {
+                console.error('Uptime command failed:', error);
+                results.errors.push(`Uptime error: ${error.message}`);
+            }
+    
+            // Left arm command
+            try {
+                results.left = await this.executeCommand(`python arm_control.py -p ${left.arm_rotate} ${left.shoulder} ${left.elbow} ${left.forarm} ${left.wrist} ${left.hand} -l left`);
+            } catch (error) {
+                console.error('Left arm command failed:', error);
+                results.errors.push(`Left arm error: ${error.message}`);
+            }
+    
+            // Right arm command
+            try {
+                results.right = await this.executeCommand(`python arm_control.py -p ${right.arm_rotate} ${right.shoulder} ${right.elbow} ${right.forarm} ${right.wrist} ${right.hand} -l right`);
+            } catch (error) {
+                console.error('Right arm command failed:', error);
+                results.errors.push(`Right arm error: ${error.message}`);
+            }
+    
+            return results;
         } catch (error) {
-            console.error(error);
-            return { error: `An error occurred: ${error.message}` };
+            // This catch block now only serves as a fallback in case there are unexpected issues
+            console.error('Unexpected error in control function:', error);
+            return { ...results, error: `An unexpected error occurred: ${error.message}` };
         }
     }
+    
 }
 
 module.exports = BaxterControl;

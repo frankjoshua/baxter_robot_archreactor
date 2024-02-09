@@ -1,7 +1,7 @@
 /control:
     post:
       summary: Control arms
-      description: Send control commands to arms.
+      description: Send control commands to arms. Values are radians or pi (need to check).
       requestBody:
         required: true
         content:
@@ -15,17 +15,57 @@
                     left:
                       type: object
                       properties:
-                        shoulder:
+                        arm_rotate:
                           type: number
                           format: float
                           example: 1.5
-                    right:
-                      type: object
-                      properties:
                         shoulder:
                           type: number
                           format: float
-                          example: -0.2
+                          example: 0.5
+                        elbow:
+                          type: number
+                          format: float
+                          example: -1.5
+                        forarm:
+                          type: number
+                          format: float
+                          example: 0.0
+                        wrist:
+                          type: number
+                          format: float
+                          example: 1.12
+                        hand:
+                          type: number
+                          format: float
+                          example: -0.1
+                    right:
+                      type: object
+                      properties:
+                        arm_rotate:
+                          type: number
+                          format: float
+                          example: 1.5
+                        shoulder:
+                          type: number
+                          format: float
+                          example: 0.8
+                        elbow:
+                          type: number
+                          format: float
+                          example: 2.0
+                        forarm:
+                          type: number
+                          format: float
+                          example: -1.7
+                        wrist:
+                          type: number
+                          format: float
+                          example: 0.76
+                        hand:
+                          type: number
+                          format: float
+                          example: -1.23
       responses:
         '200':
           description: Control command accepted
