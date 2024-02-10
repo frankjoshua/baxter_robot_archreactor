@@ -1,1 +1,2 @@
 [baxter_rest_server]
+192.168.8.137 ansible_ssh_user=robot app_root=/home/robot/baxter_robot_archreactor

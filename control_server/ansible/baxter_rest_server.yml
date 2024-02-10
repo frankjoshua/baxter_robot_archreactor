@@ -2,7 +2,7 @@
 - hosts: baxter_rest_server
 
   vars:
-    npm_cmd: "prod"
+    npm_cmd: "serve"
   
   tasks:
   - name: Ping server

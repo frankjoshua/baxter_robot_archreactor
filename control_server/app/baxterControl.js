@@ -70,7 +70,7 @@ class BaxterControl {
     
             // Left arm command
             try {
-                results.left = await this.executeCommand(`python arm_control.py -p ${left.arm_rotate} ${left.shoulder} ${left.elbow} ${left.forarm} ${left.wrist} ${left.hand} -l left`);
+                results.left = await this.executeCommand(`./arm_control.sh -p ${left.arm_rotate} ${left.shoulder} ${left.elbow} ${left.forarm} ${left.wrist} ${left.hand} 0.0 -l left`);
             } catch (error) {
                 console.error('Left arm command failed:', error);
                 results.errors.push(`Left arm error: ${error.message}`);
@@ -78,7 +78,7 @@ class BaxterControl {
     
             // Right arm command
             try {
-                results.right = await this.executeCommand(`python arm_control.py -p ${right.arm_rotate} ${right.shoulder} ${right.elbow} ${right.forarm} ${right.wrist} ${right.hand} -l right`);
+                results.right = await this.executeCommand(`python arm_control.py -p ${right.arm_rotate} ${right.shoulder} ${right.elbow} ${right.forarm} ${right.wrist} ${right.hand} 0.0 -l right`);
             } catch (error) {
                 console.error('Right arm command failed:', error);
                 results.errors.push(`Right arm error: ${error.message}`);
