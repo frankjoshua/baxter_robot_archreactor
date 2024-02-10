@@ -81,7 +81,7 @@ class BaxterControl {
     
             // Right arm command
             try {
-                results.right = await this.executeCommand(`python arm_control.py -p ${right.arm_rotate} ${right.shoulder} ${right.elbow} ${right.forarm} ${right.wrist} ${right.hand} 0.0 -l right`);
+                results.right = await this.executeCommand(`./arm_control.sh -p ${right.arm_rotate} ${right.shoulder} ${right.elbow} ${right.forarm} ${right.wrist} ${right.hand} 0.0 -l right`);
             } catch (error) {
                 console.error('Right arm command failed:', error);
                 results.errors.push(`Right arm error: ${error.message}`);
