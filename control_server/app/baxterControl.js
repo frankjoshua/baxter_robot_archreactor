@@ -4,8 +4,11 @@ class BaxterControl {
 
     constructor(config) {
         if(config){
-            console.log(config)
-            this.config = config;
+            this.config = { 
+                ...config,
+                debug: console.log
+            }
+            console.log(this.config)
             this.conn = new Client();
             this.connect().catch(console.error);
         } else {
